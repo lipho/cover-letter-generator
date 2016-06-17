@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="clg">
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body ng-controller="formCtrl" class="ng-cloak">
+    <h1><%= title %></h1>
+    <p>Fill out the fields below</p>
+    <div>
+      <form novalidate>
+        <h2>You</h2>
+        <input type="text" ng-model="person.name" placeholder="First Name"/><br />
+        <input type="text" ng-model="person.last" placeholder="Last Name"/><br />
+        <input type="text" ng-model="person.address1" placeholder="Address Line 1"/><br />
+        <input type="text" ng-model="person.address2" placeholder="Address Line 2 (optional)"/><br />
+        <input type="tel" ng-model="person.phone" placeholder="Phone Number"/><br />
+        <input type="email" ng-model="person.email" placeholder="Email"/><br />
+        <input type="url" ng-model="person.url1" placeholder="URL"/><br />
+        <input type="url" ng-model="person.url2" placeholder="URL"/><br />
+        <input type="url" ng-model="person.url3" placeholder="URL"/><br />
+        <input type="button" ng-click="resetUser()" value="Reset You" />
+      </form>
+      <form novalidate>
+        <h3>New Job</h3>
+        <input type="text" ng-model="job.companyName" placeholder="Company Name"/><br />
+        <input type="text" ng-model="job.managerName" placeholder="Hiring Person Name"/><br />
+        <input type="text" ng-model="job.address" placeholder="Address"/><br />
+        <input type="text" ng-model="job.address2" placeholder="Address Line 2"/><br />
+        <input type="tel" ng-model="job.phone" placeholder="Phone"/><br />
+        <input type="email" ng-model="job.email" placeholder="Contact Email"/><br />
+        <input type="text" ng-model="job.title" placeholder="Job Title"/><br />
+        <input type="text" ng-model="job.board" placeholder="Where it was advertised"/><br />
+        <input type="button" ng-click="resetJob()" value="Reset Job" />
+      </form>
+      <form novalidate>
+        <h3>Current Job</h3>
+        <input type="text" ng-model="currentJob.title" placeholder="Title"/><br />
+        <input type="number" ng-model="currentJob.yearsWorked" placeholder="Years Worked"/><br />
+        <input type="text" ng-model="currentJob.field" placeholder="Field of Work"/><br />
+        <input type="text" ng-model="currentJob.companyName" placeholder="Company Name"/><br />
+        <textarea ng-model="currentJob.duties" placeholder="Duties you preformed."></textarea><br />
+        <textarea ng-model="currentJob.projects" placeholder="Projects You've Done"></textarea><br />
+        <textarea ng-model="currentJob.commendations" placeholder="Good Stuff People Have Said About You"></textarea><br />
+        <input type="button" ng-click="resetCurrent()" value="Reset Current" />
+      </form>
+    </div>
+  <div class="spacer">
+    <h1 ng-show="person.name">{{person.name}}</h1>
+    <p>{{date | date:'yyyy-MM-dd'}}</p>
+    <p>
+      <span ng-show="job.managerName.length > 0">{{job.managerName}}<br /></span>
+      <span ng-show="job.companyName.length > 0">{{job.companyName}}<br /></span>
+      <span ng-show="job.address.length > 0">{{job.address}}<br /></span>
+      <span ng-show="job.address2.length > 0">{{job.address2}}<br /></span>
+      <span ng-show="job.phone.length > 0">{{job.phone}}<br /></span>
+      <span ng-show="job.email.length > 0">{{job.email}}<br /></span>
+    </p>
+    <p ng-show="job.title">
+      RE: {{job.title}}, {{date | date:'yyyy-MM-dd'}}
+    </p>
+    <p ng-show="job.managerName">
+      Dear {{job.managerName}},
+    </p>
+    <p ng-show="!job.managerName">
+      To Whom It May Concern:
+    </p>
+  </div>
+  </body>
+  <script src="/javascripts/ng.js" type="text/javascript"></script>
+</html>

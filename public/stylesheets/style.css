@@ -1,0 +1,37 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.spacer {
+  padding-top: 20px;
+}
+
+form {
+  display: inline-block;
+  text-align: center;
+}
+
+input {
+  transition:0.5s linear all;
+  background: white;
+}
+
+input .ng-invalidi {
+  background: red;
+  color:white;
+}
+
+textarea {
+  max-width: 100%;
+}
+
+
