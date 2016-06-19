@@ -6,13 +6,13 @@
   </head>
   <body ng-controller="formCtrl" class="ng-cloak">
     <h1><%= title %></h1>
-    <p>Fill out the fields below</p>
+    <p>Fill out the fields below. Not all of them have to be Filled out.</p>
     <div>
       <form novalidate>
         <h2>You</h2>
         <input type="text" ng-model="person.name" placeholder="First Name"/><br />
         <input type="text" ng-model="person.last" placeholder="Last Name"/><br />
-        <input type="text" ng-model="person.address1" placeholder="Address Line 1"/><br />
+        <input type="text" ng-model="person.address" placeholder="Address Line 1"/><br />
         <input type="text" ng-model="person.address2" placeholder="Address Line 2 (optional)"/><br />
         <input type="tel" ng-model="person.phone" placeholder="Phone Number"/><br />
         <input type="email" ng-model="person.email" placeholder="Email"/><br />
@@ -46,23 +46,29 @@
       </form>
     </div>
   <div class="spacer">
-    <h1 ng-show="person.name">{{person.name}}</h1>
-    <p>{{date | date:'yyyy-MM-dd'}}</p>
+    <h1 ng-show="person.name">{{person.name | capitalize}} <span ng-show="person.last">{{person.last | capitalize}}</span></h1>
+    <hr ng-show="person.name">
+    <div class="small">
+      <span ng-show="person.address">{{person.address | capitalize}} {{person.address2 | capitalize}} | </span>
+      <span ng-show="person.phone">{{person.phone}} | </span>
+      <span ng-show="person.email">{{person.email}} <span ng-hide="person.url1.length > 0"|</span> </span>
+    </div>
+    <p ng-show="person.name.length > 0">{{date | date:'MM-dd-yyyy'}}</p>
     <p>
-      <span ng-show="job.managerName.length > 0">{{job.managerName}}<br /></span>
-      <span ng-show="job.companyName.length > 0">{{job.companyName}}<br /></span>
-      <span ng-show="job.address.length > 0">{{job.address}}<br /></span>
-      <span ng-show="job.address2.length > 0">{{job.address2}}<br /></span>
-      <span ng-show="job.phone.length > 0">{{job.phone}}<br /></span>
-      <span ng-show="job.email.length > 0">{{job.email}}<br /></span>
+      <span ng-show="job.managerName">{{job.managerName}}<br /></span>
+      <span ng-show="job.companyName">{{job.companyName}}<br /></span>
+      <span ng-show="job.address">{{job.address}}<br /></span>
+      <span ng-show="job.address2">{{job.address2}}<br /></span>
+      <span ng-show="job.phone">{{job.phone}}<br /></span>
+      <span ng-show="job.email">{{job.email}}<br /></span>
     </p>
     <p ng-show="job.title">
-      RE: {{job.title}}, {{date | date:'yyyy-MM-dd'}}
+      RE: {{job.title}}, {{date | date:'MM-dd-yyyy'}}
     </p>
     <p ng-show="job.managerName">
       Dear {{job.managerName}},
     </p>
-    <p ng-show="!job.managerName">
+    <p ng-show="person.name.length > 0 && !job.managerName">
       To Whom It May Concern:
     </p>
   </div>

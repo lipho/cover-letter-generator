@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "bundle": "browserify ngapp.js -o ./public/javascripts/ng.js; watchify ngapp.js -o ./public/javascripts/ng.js;",
-    "start": "nodemon ./bin/www",
-    "poststart": "open localhost:3000"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "angular": "^1.5.7",

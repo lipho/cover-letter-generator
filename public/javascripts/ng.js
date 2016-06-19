@@ -4,6 +4,13 @@ require('angular-animate')
 
 var app = angular.module('clg', ['ngAnimate']);
 
+app.filter('capitalize', function() {
+	return function(input, all) {
+		var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
+		return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
+	}
+});
+
 app.controller('formCtrl', ['$scope', function($scope){
 	
 	$scope.date = new Date();
@@ -31,8 +38,6 @@ app.controller('formCtrl', ['$scope', function($scope){
 		this.resetJob()
 		this.resetCurrent();
 	};
-
-	
 
 }]);
 
