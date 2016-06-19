@@ -7,6 +7,7 @@
   <body ng-controller="formCtrl" class="ng-cloak">
     <h1><%= title %></h1>
     <p>Fill out the fields below. Not all of them have to be Filled out.</p>
+    <p><strong>Disclaimer & MIT License: PLEASE PROOFREAD BEFORE SENDING THE LETTER. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</strong></p>
     <div>
       <form novalidate>
         <h2>You</h2>
@@ -16,9 +17,9 @@
         <input type="text" ng-model="person.address2" placeholder="Address Line 2 (optional)"/><br />
         <input type="tel" ng-model="person.phone" placeholder="Phone Number"/><br />
         <input type="email" ng-model="person.email" placeholder="Email"/><br />
-        <input type="url" ng-model="person.url1" placeholder="URL"/><br />
-        <input type="url" ng-model="person.url2" placeholder="URL"/><br />
-        <input type="url" ng-model="person.url3" placeholder="URL"/><br />
+        <input type="text" ng-model="person.url1" placeholder="URL"/><br />
+        <input type="text" ng-model="person.url2" placeholder="URL"/><br />
+        <input type="text" ng-model="person.url3" placeholder="URL"/><br />
         <input type="button" ng-click="resetUser()" value="Reset You" />
       </form>
       <form novalidate>
@@ -39,9 +40,10 @@
         <input type="number" ng-model="currentJob.yearsWorked" placeholder="Years Worked"/><br />
         <input type="text" ng-model="currentJob.field" placeholder="Field of Work"/><br />
         <input type="text" ng-model="currentJob.companyName" placeholder="Company Name"/><br />
+        <input type="number" ng-model="currentJob.yrsWorked" placeholder="Years Worked"/><br />
         <textarea ng-model="currentJob.duties" placeholder="Duties you preformed."></textarea><br />
         <textarea ng-model="currentJob.projects" placeholder="Projects You've Done"></textarea><br />
-        <textarea ng-model="currentJob.commendations" placeholder="Good Stuff People Have Said About You"></textarea><br />
+        <textarea ng-model="currentJob.otherskills" placeholder="Other relevant or auxillary skills"></textarea><br />
         <input type="button" ng-click="resetCurrent()" value="Reset Current" />
       </form>
     </div>
@@ -51,14 +53,17 @@
     <div class="small">
       <span ng-show="person.address">{{person.address | capitalize}} {{person.address2 | capitalize}} | </span>
       <span ng-show="person.phone">{{person.phone}} | </span>
-      <span ng-show="person.email">{{person.email}} <span ng-hide="person.url1.length > 0"|</span> </span>
+      <span ng-show="person.email">{{person.email}} | </span>
+      <span ng-show="person.url1">{{person.url1}} | </span>
+      <span ng-show="person.url2">{{person.url2}} | </span>
+      <span ng-show="person.url3">{{person.url3}} | </span>
     </div>
     <p ng-show="person.name.length > 0">{{date | date:'MM-dd-yyyy'}}</p>
     <p>
-      <span ng-show="job.managerName">{{job.managerName}}<br /></span>
-      <span ng-show="job.companyName">{{job.companyName}}<br /></span>
-      <span ng-show="job.address">{{job.address}}<br /></span>
-      <span ng-show="job.address2">{{job.address2}}<br /></span>
+      <span ng-show="job.managerName">{{job.managerName | capitalize }}<br /></span>
+      <span ng-show="job.companyName">{{job.companyName | capitalize}}<br /></span>
+      <span ng-show="job.address">{{job.address | capitalize}}<br /></span>
+      <span ng-show="job.address2">{{job.address2 | capitalize}}<br /></span>
       <span ng-show="job.phone">{{job.phone}}<br /></span>
       <span ng-show="job.email">{{job.email}}<br /></span>
     </p>
@@ -66,10 +71,26 @@
       RE: {{job.title}}, {{date | date:'MM-dd-yyyy'}}
     </p>
     <p ng-show="job.managerName">
-      Dear {{job.managerName}},
+      Dear {{job.managerName | capitalize}},
     </p>
     <p ng-show="person.name.length > 0 && !job.managerName">
       To Whom It May Concern:
+    </p>
+    <p ng-show="job.title">
+      I read with interest your posting for {{job.title}}<span ng-show="job.board"> on the {{job.board}}</span>. I believe I possess the necessary skills and experience you are seeking and would make a valuable addition to your company.
+    </p>
+    <p>
+      <span ng-show="currentJob.yrsWorked && currentJob.field">As my resume indicates, I possess more than {{currentJob.yrsWorked}} years of progressive experience in the {{currentJob.field}} field. </span><span ng-show="currentJob.yrsWorked && currentJob.field">My professional history includes my position in {{currentJob.field}} at {{currentJob.companyName | capitalize}}. (Other Past Jobs Go Here)</span>
+    </p>
+    <p>
+      <span ng-show="currentJob.title && currentJob.companyName">Most recently, my responsibilities as {{currentJob.title}} at {{currentJob.companyName | capitalize}} match the qualifications you are seeking.</span> <span ng-show="currentJob.title && currentJob.duties">As the {{currentJob.title}}, my responsibilities included {{currentJob.duties}}.</span> <span ng-show="currentJob.projects">I assisted in the successful completion of {{currentJob.projects}}.</span><span ng-show="currentJob.otherskills"> My supervisor also relied on my ability to {{currentJob.otherskills}}.</span>
+    </p>
+    <p ng-show="person.name">
+      I have attached my resume for your review and I look forward to speaking with you further regarding your available position.
+    </p>
+    <p ng-show="person.name">
+      Sincerely,
+      {{person.name | capitalize}} {{person.last | capitalize}}
     </p>
   </div>
   </body>
