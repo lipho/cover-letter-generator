@@ -2,7 +2,7 @@
 <html ng-app="clg">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/clg.css' />
   </head>
   <body ng-controller="formCtrl" class="ng-cloak">
     <h1><%= title %></h1>
@@ -37,10 +37,9 @@
       <form novalidate>
         <h3>Current Job</h3>
         <input type="text" ng-model="currentJob.title" placeholder="Title"/><br />
-        <input type="number" ng-model="currentJob.yearsWorked" placeholder="Years Worked"/><br />
+        <input type="number" ng-model="currentJob.yrsWorked" placeholder="Years Worked"/><br />
         <input type="text" ng-model="currentJob.field" placeholder="Field of Work"/><br />
         <input type="text" ng-model="currentJob.companyName" placeholder="Company Name"/><br />
-        <input type="number" ng-model="currentJob.yrsWorked" placeholder="Years Worked"/><br />
         <textarea ng-model="currentJob.duties" placeholder="Duties you preformed."></textarea><br />
         <textarea ng-model="currentJob.projects" placeholder="Projects You've Done"></textarea><br />
         <textarea ng-model="currentJob.otherskills" placeholder="Other relevant or auxillary skills"></textarea><br />
@@ -80,7 +79,7 @@
       I read with interest your posting for {{job.title}}<span ng-show="job.board"> on the {{job.board}}</span>. I believe I possess the necessary skills and experience you are seeking and would make a valuable addition to your company.
     </p>
     <p>
-      <span ng-show="currentJob.yrsWorked && currentJob.field">As my resume indicates, I possess more than {{currentJob.yrsWorked}} years of progressive experience in the {{currentJob.field}} field. </span><span ng-show="currentJob.yrsWorked && currentJob.field">My professional history includes my position in {{currentJob.field}} at {{currentJob.companyName | capitalize}}. (Other Past Jobs Go Here)</span>
+      <span ng-show="currentJob.yrsWorked > 0 && currentJob.field">As my resume indicates, I possess more than {{currentJob.yrsWorked}} years of progressive experience in the {{currentJob.field}} field. </span><span ng-show="currentJob.yrsWorked && currentJob.field">My professional history includes my position in {{currentJob.field}} at {{currentJob.companyName | capitalize}}. (Other Past Jobs Go Here)</span>
     </p>
     <p>
       <span ng-show="currentJob.title && currentJob.companyName">Most recently, my responsibilities as {{currentJob.title}} at {{currentJob.companyName | capitalize}} match the qualifications you are seeking.</span> <span ng-show="currentJob.title && currentJob.duties">As the {{currentJob.title}}, my responsibilities included {{currentJob.duties}}.</span> <span ng-show="currentJob.projects">I assisted in the successful completion of {{currentJob.projects}}.</span><span ng-show="currentJob.otherskills"> My supervisor also relied on my ability to {{currentJob.otherskills}}.</span>
